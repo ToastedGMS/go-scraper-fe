@@ -1,73 +1,25 @@
-# React + TypeScript + Vite
+# Go Scraper Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the client-side application for the [Go Scraper](https://github.com/ToastedGMS/go-scraper) engine. It provides a clean, responsive interface for users to search, group, and navigate through consolidated news from multiple sources.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React & Tailwind CSS:** Used for a utility-first UI, focusing on readability and mobile-first responsiveness.
+- **TanStack Query:** Implemented to manage server state, providing efficient caching and robust loading/error handling for the Go API.
+- **React Router:** For seamless navigation and clean URL routing between views.
 
-## React Compiler
+## Key Features & Engineering Challenges
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Server State Management:** Instead of basic `useEffect` hooks, I used **TanStack Query** to handle the asynchronous nature of the scraper. This ensures that once a search is performed, the result is cached, preventing redundant and expensive hits to the backend.
+- **Data Normalization:** The UI is built to consume a unified data structure. It successfully maps diverse news formats (G1, CNN, etc.) into a single, cohesive "Article Card" component.
+- **UX for Long-Running Tasks:** Since the backend performs heavy CPU-bound clustering and I/O-bound scraping, the frontend implements clear loading states to maintain a smooth user experience during the processing period.
 
-## Expanding the ESLint configuration
+## Future Optimizations
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Skeleton Screens:** Implementing ghost loaders to improve perceived performance while the Go backend performs concurrent scraping.
+- **Real-time Progress:** Using WebSockets or SSE (Server-Sent Events) to show the scraping progress source-by-source.
+- **Refinement with C:** Exploring the possibility of calling WebAssembly (compiled from C/Rust) for any future heavy client-side data manipulation.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Related Projects
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [Backend (Go Scraper Engine)](https://github.com/ToastedGMS/go-scraper)
