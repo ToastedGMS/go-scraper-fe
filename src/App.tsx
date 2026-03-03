@@ -4,7 +4,9 @@ import type StoryData from './features/article/types/StoryData';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchData = async (query: string): Promise<StoryData[]> => {
-	const response = await fetch(`http://localhost:8080/search?query=${query}`);
+	const response = await fetch(
+		`${import.meta.env.VITE_API_URL}search?query=${query}`,
+	);
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
