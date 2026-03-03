@@ -18,8 +18,11 @@ This is the client-side application for the [Go Scraper](https://github.com/Toas
 
 - **Skeleton Screens:** Implementing ghost loaders to improve perceived performance while the Go backend performs concurrent scraping.
 - **Real-time Progress:** Using WebSockets or SSE (Server-Sent Events) to show the scraping progress source-by-source.
-- **Refinement with C:** Exploring the possibility of calling WebAssembly (compiled from C/Rust) for any future heavy client-side data manipulation.
 
 ## Related Projects
 
 - [Backend (Go Scraper Engine)](https://github.com/ToastedGMS/go-scraper)
+
+## Live Demo
+
+- You can see a live demo of this project [here](https://go-scraper-fe-production.up.railway.app/). 
